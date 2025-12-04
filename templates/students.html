@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Students - Student Information Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎓 Student Information Portal</h1>
+        <p class="subtitle">All Student Records</p>
+      </header>
+
+      <main>
+        <div class="page-header">
+          <h2><i class="fas fa-graduation-cap"></i> Student Records</h2>
+          <div class="record-count-badge">
+            <i class="fas fa-users"></i>
+            <span>Total: <strong>{{ students|length }}</strong></span>
+          </div>
+        </div>
+
+        {% if students %}
+        <div class="table-container">
+          <table class="students-table">
+            <thead>
+              <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for student in students %}
+              <tr>
+                <td><strong>{{ student.roll_no }}</strong></td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.department }}</td>
+                <td>
+                  <a href="mailto:{{ student.email }}">{{ student.email }}</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <h3>No Students Found</h3>
+          <p>There are no student records in the system yet.</p>
+          <a href="{{ url_for('add_student_page') }}" class="btn btn-primary"
+            >Add First Student</a
+          >
+        </div>
+        {% endif %}
+
+        <div class="navigation-links">
+          <a href="{{ url_for('index') }}">← Back to Home</a>
+          <a href="{{ url_for('add_student_page') }}">Add New Student →</a>
+          <a href="{{ url_for('search_student') }}">Search Student →</a>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          &copy; 2025 Student Information Portal | Built with Flask & Python
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

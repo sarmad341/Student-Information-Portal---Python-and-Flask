@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Information Portal - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎓 Student Information Portal</h1>
+        <p class="subtitle">Manage and view student records efficiently</p>
+      </header>
+
+      <main>
+        <div class="welcome-section">
+          <h2>Welcome to the Student Information Portal!</h2>
+          <p>
+            This portal allows you to manage student information including
+            adding new students, viewing all records, and searching for specific
+            students.
+          </p>
+        </div>
+
+        <div class="navigation-cards">
+          <div class="nav-card card-1">
+            <div class="card-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h3>Add Student</h3>
+            <p>
+              Add a new student record to the system with complete information
+            </p>
+            <a href="{{ url_for('add_student_page') }}" class="btn btn-primary">
+              <i class="fas fa-plus-circle"></i> Add Student
+            </a>
+          </div>
+
+          <div class="nav-card card-2">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>View Students</h3>
+            <p>Browse and view all student records in an organized table</p>
+            <a href="{{ url_for('students_page') }}" class="btn btn-primary">
+              <i class="fas fa-list"></i> View Students
+            </a>
+          </div>
+
+          <div class="nav-card card-3">
+            <div class="card-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Search Student</h3>
+            <p>Quickly find a student by their unique roll number</p>
+            <a href="{{ url_for('search_student') }}" class="btn btn-primary">
+              <i class="fas fa-search"></i> Search
+            </a>
+          </div>
+        </div>
+
+        <div class="features-section">
+          <h3>Features</h3>
+          <ul class="features-list">
+            <li>
+              ✅ Add new student records with name, roll number, department, and
+              email
+            </li>
+            <li>✅ View all student records in a organized table</li>
+            <li>✅ Search for students by roll number</li>
+            <li>✅ Data persistence using JSON file storage</li>
+            <li>✅ Exception handling for data validation</li>
+          </ul>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          &copy; 2025 Student Information Portal | Built with Flask & Python
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

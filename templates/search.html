@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Student - Student Information Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎓 Student Information Portal</h1>
+        <p class="subtitle">Search Student by Roll Number</p>
+      </header>
+
+      <main>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+
+        <div class="form-container">
+          <h2>Search Student</h2>
+          <p class="form-description">
+            Enter a roll number to search for a student record.
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('search_student') }}"
+            class="student-form"
+          >
+            <div class="form-group">
+              <label for="roll_no"
+                >Roll Number <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="roll_no"
+                name="roll_no"
+                required
+                placeholder="Enter roll number to search (e.g., CS001)"
+                class="form-input"
+                value="{{ request.form.get('roll_no', '') }}"
+              />
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i> Search
+              </button>
+              <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Search Results -->
+        {% if student %}
+        <div class="search-results">
+          <h3>Student Found</h3>
+          <div class="student-card">
+            <div class="student-info">
+              <div class="info-row">
+                <span class="info-label">Roll Number:</span>
+                <span class="info-value"
+                  ><strong>{{ student.roll_no }}</strong></span
+                >
+              </div>
+              <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span class="info-value">{{ student.name }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Department:</span>
+                <span class="info-value">{{ student.department }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value"
+                  ><a href="mailto:{{ student.email }}"
+                    >{{ student.email }}</a
+                  ></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        {% elif request.method == 'POST' and not student %}
+        <div class="search-results">
+          <div class="not-found">
+            <div class="not-found-icon">❌</div>
+            <h3>Student Not Found</h3>
+            <p>The roll number you entered does not exist in the system.</p>
+            <p>
+              Please check the roll number and try again, or
+              <a href="{{ url_for('add_student_page') }}">add a new student</a>.
+            </p>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="navigation-links">
+          <a href="{{ url_for('index') }}">← Back to Home</a>
+          <a href="{{ url_for('students_page') }}">View All Students →</a>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          &copy; 2025 Student Information Portal | Built with Flask & Python
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
