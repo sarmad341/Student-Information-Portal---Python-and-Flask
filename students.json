@@ -4,5 +4,23 @@
         "roll_no": "B23S0982CS22",
         "department": "CS",
         "email": "muhammadsarmad2003@gmail.com"
+    },
+    {
+        "name": "Ibtehaj Ahmed",
+        "roll_no": "B23S0232CS009",
+        "department": "CS",
+        "email": "Ibtehajahmed342@gmail.com"
+    },
+    {
+        "name": "Alyan Ayoub",
+        "roll_no": "B23S0266BTY006",
+        "department": "BTY",
+        "email": "alyanayoub908@gmail.com"
+    },
+    {
+        "name": "Muhammad Asad Nawaz",
+        "roll_no": "B23S0243CS010",
+        "department": "CS",
+        "email": "asadnawaz256@gmail.com"
     }
 ]
